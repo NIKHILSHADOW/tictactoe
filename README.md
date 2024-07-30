@@ -90,7 +90,7 @@ classDiagram
         - Level level
         - Symbol symbol
 
-        +play()
+        +play(Level)
     }
 
     Game  "1" --* "1"  Board
@@ -105,3 +105,136 @@ classDiagram
 One human can play many games but why 1:1?
 
 - because the human might have different symbol in different games.
+
+# Problems:
+
+- Here Human canot play with human (introduce player parent abstract class )
+- Much memory is needed for human instances.
+- Bot play will not follow SRP and OCP.
+
+Here we introduce
+
+```mermaid
+
+classDiagram
+    class Game {
+        - Board board
+        - Player[] players
+
+        + makeMove()
+        + register()
+        + startGame()
+    }
+
+
+```
+
+Design the game of tic-tac-toe game that is played between two players on a n x n grid. The game supports following features:
+
+1. One or both of the two players can be computer.
+
+2. User should be able to select a difficulty level(easy, medium, hard) while playing with a computer.
+
+Future Scope:
+
+1. Add undo feature to the game.
+
+2. Rules to decide the winner can be changed.
+
+```mermaid
+
+classDiagram
+
+class Game {
+    - Board board
+    - Player[] players
+    - Stack~Cell~ logs
+    - GameStatusStrategy gameStatusStrategy
+
+    + startGame() void
+    + checkGameStatus() GameStatus
+    + undo()  Board
+}
+
+class Player {
+    <<abstract>>
+    - Symbol symbol
+    + play(Board) Cell*
+}
+
+class Human {
+    - User user
+    + play(Board) Cell
+}
+
+class Computer {
+    - Level level
+    - PlayingStrategy playingStrategy
+
+    + play(Board) : Cell
+}
+
+class User {
+    - int id
+    - String name
+    - String email
+    - String phone
+}
+
+Player <|-- Human
+Player <|-- Computer
+
+Human --o User
+
+
+class GameStatusStrategy {
+    <<abstract>>
+    + checkStatus() GameStatus*
+}
+
+class Board {
+    - Cell[][] cells
+}
+
+class Cell {
+    - int x
+    - int y
+    - Symbol symbol
+}
+
+Game "*" --o "1" GameStatusStrategy
+Game "1" --* "1" Board
+Board "1" --* "*" Cell
+
+class rowColumnDiagStrategy {
+    + checkStatus() GameStatus
+}
+
+class rowColumnStrategy {
+    + checkStatus() GameStatus
+}
+
+GameStatusStrategy  <|--  rowColumnStrategy
+GameStatusStrategy  <|--  rowColumnDiagStrategy
+
+
+class PlayingStrategy {
+    <<abstract>>
+    + play(Board) Cell*
+}
+
+class RandomStrategy {
+    + play(Board) Cell
+}
+
+class MinMaxStrategy {
+    + play(Board) Cell
+}
+
+Computer --o PlayingStrategy
+
+PlayingStrategy <|-- RandomStrategy
+PlayingStrategy <|-- MinMaxStrategy
+
+
+```
