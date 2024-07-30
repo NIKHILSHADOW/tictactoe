@@ -20,7 +20,7 @@ How to view Board
 ttt view
 ```
 
-![TicTacToe](C:\Users\Public\files\projects\lld\tictactoe\static\tictactoe.iuml)
+![TicTacToe](http://www.plantuml.com/plantuml/proxy?cache=no&src=https://raw.githubusercontent.com/NIKHILSHADOW/tictactoe/master/static/tictactoe.iuml)>
 
 Steps to think
 
