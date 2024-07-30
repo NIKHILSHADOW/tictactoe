@@ -9,10 +9,20 @@
 
         usecase register
 
-        usecase startGame
+        usecase startgame
 
-        usecase checkWinner
+        usecase checkwinner
+
+        usecase makemove
     }
+
+    makemove --> checkwinner
+
+    p1 -- register
+    p1 -- startgame
+    p1 -- checkwinner
+    p1 -- makemove
+
 
 
 @enduml

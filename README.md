@@ -1,37 +1,26 @@
 ## TIC TAC TOE
 
-- CLI APPLICATION
+- COMMAND LINE APPLICATION
 
-```plantuml
+How to quit game
 
-@startuml
-
-    actor Player1 as p1
-    actor Player2 as p2
-
-    Rectangle Game {
-        left to right direction
-
-        usecase register
-
-        usecase startgame
-
-        usecase checkwinner
-
-        usecase makemove
-    }
-
-    makemove --> checkwinner
-
-    p1 -- register
-    p1 -- startgame
-    p1 -- checkwinner
-    p1 -- makemove
-
-
-
-@enduml
 ```
+ttt quit
+```
+
+How to start
+
+```
+ttt start
+```
+
+How to view Board
+
+```
+ttt view
+```
+
+![TicTacToe](C:\Users\Public\files\projects\lld\tictactoe\static\tictactoe.iuml)
 
 Steps to think
 
